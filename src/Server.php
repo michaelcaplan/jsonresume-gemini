@@ -3,21 +3,26 @@
 namespace michaelcaplan\JsonResume\Gemini;
 
 use Laminas\Config;
+use Laminas\Log\Logger;
+use michaelcaplan\JsonResume\Gemini\Server\TcpHandler;
 use React\Socket;
 
 class Server
 {
     protected Config\Config $config;
     private Socket\SecureServer $server;
+    private TcpHandler $handler;
+    private Logger $logger;
 
-    function __construct($configPath)
+    public function __construct(Config\Config $config, Logger $logger)
     {
-        $this->config = Config\Factory::fromFile($configPath, true);
+        $this->config = $config;
+        $this->logger = $logger;
 
         $this->constructServer();
     }
 
-    private function constructServer()
+    private function constructServer(): void
     {
         $this->server = new Socket\SecureServer(
             new Socket\TcpServer($this->config->uri),
@@ -31,23 +36,29 @@ class Server
         );
 
         $this->server->pause();
+
+        $this->handler = new TcpHandler($this);
+        $this->server->on('connection', [$this->handler, 'onConnection']);
     }
 
-    public function start()
+    public function start(): void
     {
-        $this->server->on('connection', function (Socket\ConnectionInterface $connection) {
-            echo 'Secure connection from ' . $connection->getRemoteAddress() . PHP_EOL;
-
-            $connection->on('data', function ($data) use ($connection) {
-
-                echo $data . PHP_EOL;
-
-                $connection->write("20 text/gemini\r\n");
-                $connection->write('# Hello ' . rand(0, 1000) . ' World');
-                $connection->end();
-            });
-        });
-
         $this->server->resume();
+    }
+
+    /**
+     * @return Config\Config
+     */
+    public function getConfig(): Config\Config
+    {
+        return $this->config;
+    }
+
+    /**
+     * @return Logger
+     */
+    public function getLogger(): Logger
+    {
+        return $this->logger;
     }
 }
