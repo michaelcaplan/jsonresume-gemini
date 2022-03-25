@@ -1,0 +1,29 @@
+{
+  "name": "michaelcaplan/jsonresume-gemini",
+  "description": "A Gemini server implementation to dynamically deliver your JSON resume",
+  "keywords": [
+    "jsonresume",
+    "ReactPHP",
+    "gemini",
+    "gemini-protocol"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michael Caplan",
+      "homepage": "https://michaelcaplan.com",
+      "email": "me@michaelcaplan.com"
+    }
+  ],
+  "require": {
+    "react/socket": "v1.11.0",
+    "php": ">=8.0",
+    "laminas/laminas-log": "2.15.0",
+    "laminas/laminas-config": "3.7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "michaelcaplan\\JsonResume\\Gemini\\": "src"
+    }
+  }
+}
