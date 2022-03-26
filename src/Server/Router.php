@@ -5,6 +5,7 @@ namespace michaelcaplan\JsonResume\Gemini\Server;
 use Laminas\Config\Config;
 use Laminas\View;
 use michaelcaplan\JsonResume\Gemini\Resume;
+use michaelcaplan\JsonResume\Gemini\View\Helper\DateRange;
 use michaelcaplan\JsonResume\Gemini\View\Helper\Figlet;
 
 class Router
@@ -33,6 +34,11 @@ class Router
         $helperPluginManager->setFactory(Figlet::class, function () {
 
             return new Figlet();
+        });
+        $helperPluginManager->setAlias('dateRange', DateRange::class);
+        $helperPluginManager->setFactory(DateRange::class, function () {
+
+            return new DateRange();
         });
 
         // Initialize the view
@@ -96,6 +102,10 @@ class Router
         } catch (View\Exception\RuntimeException) {
             $message->setCode(51);
             $viewModel->setTemplate($theme . '/51');
+            return $this->view->render($layout);
+        } catch (\Exception) {
+            $message->setCode(42);
+            $viewModel->setTemplate($theme . '/42');
             return $this->view->render($layout);
         }
     }

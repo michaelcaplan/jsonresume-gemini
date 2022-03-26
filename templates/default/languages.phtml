@@ -1,6 +1,6 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
 
-```
+<?php foreach ($this->sectionData as $language) { ?>
+* <?= $language['language'] ?> (<?= $language['fluency'] ?>)
+<?php } ?>

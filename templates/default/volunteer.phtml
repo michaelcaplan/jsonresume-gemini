@@ -1,6 +1,24 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
+<?php foreach ($this->sectionData as $volunteer) { ?>
 
-```
+## <?= $volunteer['position'] ?> (<?= $this->dateRange($volunteer['startDate'], $volunteer['endDate']) ?>)
+    <?php if (!empty($volunteer['url'])) { ?>
+
+=> <?= $volunteer['url'] ?> <?= $volunteer['organization'] ?> <?= !empty($volunteer['location']) ? ' - ' . $volunteer['location'] : '' ?>
+    <?php } else { ?>
+
+<?= $volunteer['organization'] ?> <?= !empty($volunteer['location']) ? ' - ' . $volunteer['location'] : '' ?>
+    <?php } ?>
+
+
+<?= !empty($volunteer['summary']) ? ltrim($volunteer['summary'], '#') : '' ?>
+
+    <?php if (!empty($volunteer['highlights'])) { ?>
+        <?php foreach ($volunteer['highlights'] as $highlight) { ?>
+
+* <?= $highlight ?>
+        <?php } ?>
+    <?php } ?>
+
+<?php } ?>

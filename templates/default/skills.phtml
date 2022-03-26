@@ -1,6 +1,13 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
 
-```
+<?php foreach ($this->sectionData as $skill) { ?>
+
+## <?= $skill['name'] ?> (<?= $skill['level'] ?>)
+<?php foreach ($skill['keywords'] as $keyword) { ?>
+
+* <?= $keyword ?>
+<?php } ?>
+
+
+<?php } ?>

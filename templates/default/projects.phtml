@@ -1,6 +1,25 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
 
-```
+<?php foreach ($this->sectionData as $project) { ?>
+
+## <?= $project['name'] ?> (<?= $this->dateRange($project['startDate'], $project['endDate']) ?>)
+    <?php if (!empty($project['url'])) { ?>
+
+=> <?= $project['url'] ?> <?= $project['entity'] ?>
+    <?php } else { ?>
+
+<?= $project['entity'] ?>
+    <?php } ?>
+
+
+<?= !empty($project['description']) ? ltrim($project['description'], '#') : '' ?>
+
+    <?php if (!empty($project['highlights'])) { ?>
+        <?php foreach ($project['highlights'] as $highlight) { ?>
+
+* <?= $highlight ?>
+        <?php } ?>
+    <?php } ?>
+
+<?php } ?>

@@ -1,6 +1,14 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
 
-```
+<?php foreach ($this->sectionData as $publication) { ?>
+
+## <?= $publication['name'] ?> (<?= $publication['releaseDate'] ?>)
+### <?= $publication['publisher'] ?>
+
+<?php if (!empty($publication['url'])) { ?>
+
+=> <?= $publication['url'] ?>
+<?php } ?>
+
+<?php } ?>

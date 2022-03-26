@@ -1,6 +1,12 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
 
-```
+<?php foreach ($this->sectionData as $award) { ?>
+
+## <?= $award['title'] ?> (<?= $award['date'] ?>)
+### <?= $award['awarder'] ?>
+
+<?= !empty($award['summary']) ? ltrim($award['summary'], '#') : '' ?>
+
+
+<?php } ?>

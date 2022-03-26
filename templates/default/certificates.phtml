@@ -1,6 +1,14 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
 
-```
+<?php foreach ($this->sectionData as $certificate) { ?>
+
+## <?= $certificate['name'] ?> (<?= $certificate['date'] ?>)
+### <?= $certificate['issuer'] ?>
+
+<?php if (!empty($certificate['url'])) { ?>
+
+=> <?= $certificate['url'] ?>
+<?php } ?>
+
+<?php } ?>

@@ -1,6 +1,9 @@
 # <?= ucfirst($this->sectionName) ?>
 
-```
-<?= json_encode($this->sectionData, JSON_PRETTY_PRINT) ?>
 
-```
+<?php foreach ($this->sectionData as $education) { ?>
+
+## <?= $education['area'] ?> (<?= !empty($education['startDate']) ? $education['startDate'] : '' ?> - <?= !empty($education['endDate']) ? $education['endDate'] : '' ?>)
+<?= $education['institution'] ?>
+
+<?php } ?>
