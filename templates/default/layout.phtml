@@ -1,0 +1,26 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+
+<?php if (!empty($this->basics['name'])) { ?>
+``` <?= $this->basics['name'] ?>
+
+<?= $this->figlet($this->basics['name'], 'banner3-D') ?>
+
+```
+<?php } ?>
+<?php if (!empty($this->basics['label'])) { ?>
+### <?= $this->basics['label'] ?>
+<?php } ?>
+
+<?= $this->content ?>
+
+# Navigate Around
+<?php if (!empty($this->sections)) { ?>
+    <?php foreach ($this->sections as $section) { ?>
+
+=> <?= $section ?>.gmi <?= ucfirst($section) ?>
+    <?php } ?>
+<?php } ?>

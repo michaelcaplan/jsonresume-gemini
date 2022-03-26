@@ -2,17 +2,21 @@
 
 namespace michaelcaplan\JsonResume\Gemini;
 
+use Laminas\Config\Config;
+
 class Resume
 {
     protected array $json;
     protected string $url;
     protected int $ttl = 3600;
     protected int $accessedTime;
+    protected Config $config;
 
-    public function __construct(string $url, int $ttl = 3600)
+    public function __construct(Config $config)
     {
-        $this->url = $url;
-        $this->ttl = $ttl;
+        $this->url = $config->url;
+        $this->ttl = $config->ttl ?? 3600;
+        $this->config = $config;
 
         $this->load();
     }
@@ -36,6 +40,27 @@ class Resume
         return false;
     }
 
+    public function getSectionNames(): array
+    {
+        if ($this->isStale()) {
+            $this->load();
+        }
+
+        $sectionNames = [];
+
+        foreach ($this->json as $sectionName => $section) {
+            if ($sectionName == '$schema') {
+                continue;
+            }
+
+            if (!empty($section)) {
+                $sectionNames[] = $sectionName;
+            }
+        }
+
+        return $sectionNames;
+    }
+
     public function getSection(string $section): array
     {
         if ($this->isStale()) {
@@ -43,5 +68,10 @@ class Resume
         }
 
         return $this->json[$section] ?? [];
+    }
+
+    public function getConfig(): Config
+    {
+        return $this->config;
     }
 }

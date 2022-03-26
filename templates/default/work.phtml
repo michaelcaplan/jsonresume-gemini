@@ -1,0 +1,25 @@
+# <?= ucfirst($this->sectionName) ?>
+
+<?php foreach ($this->sectionData as $work) { ?>
+
+## <?= $work['position'] ?> (<?= !empty($work['startDate']) ? $work['startDate'] : '' ?> - <?= !empty($work['endDate']) ? $work['endDate'] : '' ?>)
+<?php if (!empty($work['url'])) { ?>
+
+=> <?= $work['url'] ?> <?= $work['name'] ?> <?= !empty($work['location']) ? ' - ' . $work['location'] : '' ?>
+<?php } else { ?>
+
+<?= $work['name'] ?> <?= !empty($work['location']) ? ' - ' . $work['location'] : '' ?>
+<?php } ?>
+
+
+<?= !empty($work['summary']) ? $work['summary'] : '' ?>
+
+<?php if (!empty($work['highlights'])) { ?>
+    <?php foreach ($work['highlights'] as $highlight) { ?>
+
+* <?= $highlight ?>
+    <?php } ?>
+<?php } ?>
+
+<?php } ?>
+

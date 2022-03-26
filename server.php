@@ -6,6 +6,8 @@ use Laminas\Log;
 
 require __DIR__ . '/vendor/autoload.php';
 
+const __ROOT_DIR__ = __DIR__;
+
 $logger = new Log\Logger([
     'exceptionhandler' => true,
     'errorhandler' => true

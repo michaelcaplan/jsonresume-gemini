@@ -19,7 +19,9 @@
     "react/socket": "^v1.11",
     "php": ">=8.0",
     "laminas/laminas-log": "^2.15",
-    "laminas/laminas-config": "^3.7"
+    "laminas/laminas-config": "^3.7",
+    "laminas/laminas-view": "^2.20",
+    "laminas/laminas-text": "^2.9.0"
   },
   "require-dev": {
     "phpmd/phpmd" : "@stable",

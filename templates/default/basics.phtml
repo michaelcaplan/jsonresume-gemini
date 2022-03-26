@@ -1,0 +1,58 @@
+<?= $this->sectionData['summary'] ?>
+
+### Contact Me
+<?php
+    if (!empty($this->sectionData['location'])) {
+        $location = [];
+
+        if (!empty($this->sectionData['location']['address'])) {
+            $location[] = $this->sectionData['location']['address'];
+        }
+
+        if (!empty($this->sectionData['location']['city'])) {
+            $location[] = $this->sectionData['location']['city'];
+        }
+
+        if (!empty($this->sectionData['location']['region'])) {
+            $location[] = $this->sectionData['location']['region'];
+        }
+
+        if (!empty($this->sectionData['location']['postalCode'])) {
+            $location[] = $this->sectionData['location']['postalCode'];
+        }
+
+        if (!empty($this->sectionData['location']['countryCode'])) {
+            $location[] = $this->sectionData['location']['countryCode'];
+        }
+
+        echo implode(', ', $location);
+    }
+?>
+
+<?php
+    $profiles = $this->sectionData['profiles'];
+
+    if (!empty($this->sectionData['email'])) {
+        array_unshift(
+                $profiles, [
+                'url' => 'mailto:' . $this->sectionData['email'],
+                'network' => 'Email'
+            ]
+        );
+    }
+
+    if (!empty($this->sectionData['url'])) {
+        array_unshift(
+            $profiles, [
+                'url' => $this->sectionData['url'],
+                'network' => 'HTTP'
+            ]
+        );
+    }
+?>
+<?php if (!empty($profiles)) { ?>
+    <?php foreach ($profiles as $profile) { ?>
+
+=> <?= $profile['url'] ?> <?= $profile['network'] ?>
+    <?php } ?>
+<?php } ?>
