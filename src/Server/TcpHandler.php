@@ -22,6 +22,10 @@ class TcpHandler
         $connection->on('data', function ($data) use ($connection) {
             $this->onData($connection, $data);
         });
+
+        $connection->on('error', function ($error) {
+            $this->onError($error);
+        });
     }
 
     public function onData(Socket\ConnectionInterface $connection, string $data): void
@@ -38,5 +42,10 @@ class TcpHandler
         $connection->write($message->getResponceHeader());
         $connection->write($message->getBody());
         $connection->end();
+    }
+
+    public function onError(\Exception $exception): void
+    {
+        $this->server->getLogger()->log(Logger::ERR, $exception);
     }
 }

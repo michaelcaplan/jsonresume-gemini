@@ -39,6 +39,7 @@ class Server
 
         $this->handler = new TcpHandler($this);
         $this->server->on('connection', [$this->handler, 'onConnection']);
+        $this->server->on('error', [$this->handler, 'onError']);
     }
 
     public function start(): void
