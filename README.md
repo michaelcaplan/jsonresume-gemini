@@ -46,3 +46,5 @@ WantedBy=default.target
 ```
 * `systemctl enable jsonresume-gemini`
 * `systemctl start jsonresume-gemini`
+
+### Find me at [gemini://michaelcaplan.com](gemini://michaelcaplan.com)
